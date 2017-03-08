@@ -1,6 +1,6 @@
 {
-    "name": "symbols-test",
-    "displayName": "symbols-test",
+    "name": "vscode-api-playground-symbol-icons",
+    "displayName": "VSCode Api Playground: Symbol Icons",
     "description": "",
     "version": "0.0.1",
     "publisher": "hoovercj",
