@@ -1,6 +1,6 @@
 {
-    "name": "symbols-test",
-    "displayName": "symbols-test",
+    "name": "vscode-api-playground-newfile-languagemode",
+    "displayName": "VSCode Api Playground: New File with Language Mode",
     "description": "",
     "version": "0.0.1",
     "publisher": "hoovercj",
@@ -15,6 +15,21 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "commands": [
+            {
+                "command": "editor.newFile.withLanguageMode",
+                "title": "Open new file with default language mode"
+            }
+        ],
+        "configuration": {
+            "properties": {
+                "editor.newFile.defaultLanguageMode": {
+                    "type": "string",
+                    "default": "",
+                    "description": "The language id of the language to open new files with"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
