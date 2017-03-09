@@ -1,12 +1,26 @@
 {
-    "name": "vscode-api-playground-newfile-languagemode",
-    "displayName": "VSCode Api Playground: New File with Language Mode",
+    "name": "vscode-newfile-languagemode",
+    "displayName": "New File with Language Mode",
     "description": "",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "publisher": "hoovercj",
     "engines": {
         "vscode": "^1.10.0"
     },
+    "author": {
+        "name": "Cody Hoover",
+        "url": "www.codyhoover.com",
+        "email": "vscode@codyhoover.com"
+    },
+    "bugs": {
+        "url": "https://www.github.com/hoovercj/vscode-api-playground/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/hoovercj/vscode-api-playground"
+    },
+    "icon": "images/icon.png",
+    "license": "MIT",
     "categories": [
         "Other"
     ],
@@ -17,16 +31,16 @@
     "contributes": {
         "commands": [
             {
-                "command": "editor.newFile.withLanguageMode",
-                "title": "Open new file with default language mode"
+                "command": "editor.newFile.withCurrentLanguageMode",
+                "title": "Open new file with language mode of the currently active editor"
             }
         ],
         "configuration": {
             "properties": {
-                "editor.newFile.defaultLanguageMode": {
-                    "type": "string",
-                    "default": "",
-                    "description": "The language id of the language to open new files with"
+                "editor.newFile.languageModes": {
+                    "type": "array",
+                    "default": [],
+                    "description": "An array of language ids to create commands for. For each language created here, a command of the form `editor.newFile.withLanguageId.<id>` will be created (e.g. `editor.newFile.withLanguageId.html`)."
                 }
             }
         }
