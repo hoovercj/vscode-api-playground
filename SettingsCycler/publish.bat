@@ -1,0 +1,1 @@
+vsce publish --baseImagesUrl https://github.com/hoovercj/vscode-api-playground/raw/master/SettingsCycler

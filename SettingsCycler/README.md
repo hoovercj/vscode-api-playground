@@ -56,6 +56,9 @@ This is a part of the my [API Playground repository](https://www.github.com/hoov
 
 ## Release Notes
 
+### 0.0.2
+* Fixed README icon
+
 ### 0.0.1
 Initial release
 * Added `settings.cycle` configuration
