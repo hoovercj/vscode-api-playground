@@ -9,6 +9,8 @@ After configuring ([see below](#how-to-use)), you can cycle through values by as
 
 The commands will check if a workspace setting is set, then a user setting, and if neither is set will default to changing workspace settings.
 
+![Demo](images/demo.gif)
+
 ## Inspiration:
 A gitter user asked if it was possible to toggle `explorer.autoReveal` via a keyboard shortcut. It isn't, but I realized how general this problem was.
 

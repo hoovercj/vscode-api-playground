@@ -19,7 +19,7 @@ interface Command {
 }
 
 function cycleSetting(command: Command): void {
-    if (!command.setting || command.values.length === 0) {
+    if (!command.setting) {
         return;
     }
     
@@ -41,7 +41,9 @@ function cycleSetting(command: Command): void {
 function getNewValue(command: Command, currentValue: any): any {
     // Find the index of the current value in the command values array,
     // or -1 if the current value is not one of the configured values
-    let index = command.values.findIndex(commandValue => {
+    
+    const values = command.values || [true, false];
+    let index = values.findIndex(commandValue => {
         return deepEqual(commandValue, currentValue);
     });
 
@@ -53,7 +55,7 @@ function getNewValue(command: Command, currentValue: any): any {
     // Adding 1 to the index will point to the next value in the command values array,
     // or it will point to the first value in the case that current value wasn't found.
     // If the index was incremented past the last value, modulus will wrap it to the beginning.
-    return command.values[(index + 1) % command.values.length];
+    return values[(index + 1) % values.length];
 }
 
 function useGlobal(command: Command, setting: { key: string; globalValue?: {}; workspaceValue?: {}; }): boolean {
