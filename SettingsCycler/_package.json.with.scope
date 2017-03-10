@@ -1,0 +1,82 @@
+{
+  "name": "vscode-settings-cycler",
+  "displayName": "Settings Cycler",
+  "description": "Allows cycling through vscode settings using keyboard shortcuts",
+  "version": "0.0.1",
+  "publisher": "hoovercj",
+  "engines": {
+    "vscode": "^1.10.0"
+  },
+  "author": {
+    "name": "Cody Hoover",
+    "url": "www.codyhoover.com",
+    "email": "vscode@codyhoover.com"
+  },
+  "bugs": {
+    "url": "https://www.github.com/hoovercj/vscode-api-playground/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/hoovercj/vscode-api-playground"
+  },
+  "icon": "images/icon.png",
+  "license": "MIT",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "configuration": {
+      "properties": {
+        "settings.cycle": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "setting": {
+                "type": "string",
+                "description": "The full setting name to change."
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "description": "A valid value for the setting"
+                },
+                "default": [true, false]
+              }
+              // "scope": {
+              //   "type": "string",
+              //   "enum": [
+              //     "user",
+              //     "workspace",
+              //     "default"
+              //   ],
+              //   "default": "default",
+              //   "description": "The scope to toggle the setting for. By default the settings will be inspected and the least specific possible setting will be changed. If only the user or workspace setting is set, that will be toggled, but if a both are set then the workspace setting will be toggled. To force the extension to use or or the other, use that for this setting."
+              // }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "mocha": "^2.3.3",
+    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.32"
+  },
+  "dependencies": {
+    "deep-equal": "^1.0.1"
+  }
+}
