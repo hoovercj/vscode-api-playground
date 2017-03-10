@@ -2,7 +2,7 @@
     "name": "vscode-newfile-languagemode",
     "displayName": "New File with Language Mode",
     "description": "",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "hoovercj",
     "engines": {
         "vscode": "^1.10.0"
@@ -36,13 +36,6 @@
             }
         ],
         "configuration": {
-            "properties": {
-                "editor.newFile.languageModes": {
-                    "type": "array",
-                    "default": [],
-                    "description": "An array of language ids to create commands for. For each language created here, a command of the form `editor.newFile.withLanguageId.<id>` will be created (e.g. `editor.newFile.withLanguageId.html`)."
-                }
-            }
         }
     },
     "scripts": {

@@ -1,19 +1,15 @@
 'use strict';
-import { ExtensionContext, workspace, window, commands } from 'vscode';
+import { ExtensionContext, workspace, window, commands, languages } from 'vscode';
 
 let ctx: ExtensionContext;
 let customCommands = [];
 export function activate(context: ExtensionContext) {
     ctx = context;
-    createCommandsFromConfig();
+    createCommandsForLanguages();
 
     const command = commands.registerCommand('editor.newFile.withCurrentLanguageMode', () => {
         const language = window.activeTextEditor.document.languageId
         openTextDocumentWithLanguageId(language);
-    });
-
-    workspace.onDidChangeConfiguration(() => {
-        createCommandsFromConfig();
     });
 
     ctx.subscriptions.push(command);
@@ -31,19 +27,20 @@ function openTextDocumentWithLanguageId(language: string): void {
 }
 
 /**
- * Creates new commands from the configuration.
- * It reads the `editor.newFile.languageModes` setting,
- * and for each language specified it creates a command
+ * Creates a new command for every valid language id.
+ * It gets the list of languages from vscode,
+ * and for each language it creates a command
  * of the form `editor.newFile.withLanguageMode.<language>`.
  * These can then be configured to be triggered via keyboard shortcuts.
  */
-function createCommandsFromConfig(): void {
+function createCommandsForLanguages(): void {
     disposeCustomCommands();
-    const languages = workspace.getConfiguration('editor.newFile').get('languageModes', []);
-    languages.forEach(language => {
-        customCommands.push(commands.registerCommand(`editor.newFile.withLanguageMode.${language}`, () => {
-            openTextDocumentWithLanguageId(language)
-        }));
+    languages.getLanguages().then(languageList => {
+        languageList.forEach(language => {
+            customCommands.push(commands.registerCommand(`editor.newFile.withLanguageMode.${language}`, () => {
+                openTextDocumentWithLanguageId(language)
+            }));
+        });
     });
 }
 
