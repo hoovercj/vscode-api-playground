@@ -10,8 +10,8 @@ In [this question](https://stackoverflow.com/questions/42673828/how-to-collapse-
 Simply install the extension. As you change documents you'll notice that all directories are collapsed except the one that contains the file you are currently editing.
 
 ## Apis Used:
-* [window.onDidChangeActiveTextEditor]() - An event that is triggerd when the active text editor changes
-* [commands.executeCommand]() - A function that allows executing built in commands or commands that are provided by the extension. In this case, I execute:
+* [window.onDidChangeActiveTextEditor](https://code.visualstudio.com/docs/extensionAPI/vscode-api#_window) - An event that is triggered when the active text editor changes
+* [commands.executeCommand](https://code.visualstudio.com/docs/extensionAPI/vscode-api#_commands) - A function that allows executing built in commands or commands that are provided by the extension. In this case, I execute:
   * `workbench.files.action.collapseExplorerFolders` to collapse the folders
   * `workbench.files.action.showActiveFileInExplorer` to re-focus on the active file in the tree view which expands only the necessary directories
   * `workbench.action.focusActiveEditorGroup` to put the cursor focus back in the file that was opened
