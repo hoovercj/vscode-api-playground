@@ -7,7 +7,6 @@
 // ${cwd}: the current working directory of the spawned process
 
 // A task runner that calls a custom npm script that compiles the extension.
-
 {
     "version": "0.1.0",
 
@@ -20,25 +19,12 @@
     // show the output window only if unrecognized errors occur.
     "showOutput": "silent",
 
-    "tasks": [{
+    // we run the custom script "compile" as defined in package.json
+    "args": ["run", "compile", "--loglevel", "silent"],
 
-        "taskName": "run",
+    // The tsc compiler is started in watching mode
+    "isWatching": true,
 
-        // we run the custom script "compile" as defined in package.json
-        "args": ["run", "compile", "--loglevel", "silent"],
-
-        // The tsc compiler is started in watching mode
-        "isBackground": true,
-
-        // use the standard tsc in watch mode problem matcher to find compile problems in the output.
-        "problemMatcher": "$tsc-watch"
-
-    },
-    {
-
-        "taskName": "test",
-
-        "isTestCommand": true
-
-    }]
+    // use the standard tsc in watch mode problem matcher to find compile problems in the output.
+    "problemMatcher": "$tsc-watch"
 }
