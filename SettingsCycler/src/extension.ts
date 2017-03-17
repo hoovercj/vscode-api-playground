@@ -1,5 +1,5 @@
 'use strict';
-import { ExtensionContext, workspace, window, commands as Commands, languages } from 'vscode';
+import { ExtensionContext, workspace, window, commands as Commands, languages, WorkspaceConfiguration } from 'vscode';
 
 const deepEqual = require('deep-equal')
 
@@ -8,6 +8,8 @@ let customCommands = [];
 export function activate(context: ExtensionContext) {
     ctx = context;
     createCommandsForSettings();
+
+    registerUtilityCommands()
 
     workspace.onDidChangeConfiguration(() => createCommandsForSettings());
 }
@@ -18,13 +20,38 @@ interface Command {
     // scope: string;
 }
 
-function cycleSetting(command: Command): void {
+interface CurrentSetting {
+    value: any,
+    global: boolean
+}
+
+function registerUtilityCommands() {
+    Commands.registerCommand('settings.cycle.show', function () {
+        const config = workspace.getConfiguration();
+        const commands = workspace.getConfiguration('settings').get<Command[]>('cycle');
+        window.showQuickPick(commands.reduce(function(o, c) {
+            o.push(`${c.setting} : ${ JSON.stringify(getCurrentSetting(c, config).value) }`)
+            return o
+        },[])).then((selection:string) => {
+            if(selection) {
+                const setting = selection.split(' : ')
+                if(setting.length) {
+                    var command = commands.filter(cmd => {
+                        return cmd.setting == setting[0]
+                    })
+                    if(command.length) cycleSetting(command[0])
+                }
+            }
+        })
+    })
+}
+
+function getCurrentSetting(command: Command, config: WorkspaceConfiguration): CurrentSetting {
     if (!command.setting) {
         return;
     }
-    
+
     // Cycle the setting
-    const config = workspace.getConfiguration();
     const setting = config.inspect(command.setting);
     const global = useGlobal(command, setting);
     // The current value should be the current value with respect
@@ -33,9 +60,16 @@ function cycleSetting(command: Command): void {
     if (currentValue == null) {
         currentValue = setting.defaultValue;
     }
-    const newValue = getNewValue(command, currentValue);
+    return {value: currentValue, global: global}
+}
 
-    config.update(command.setting, newValue, global);
+function cycleSetting(command: Command): void {
+    const config = workspace.getConfiguration();
+
+    let current = getCurrentSetting(command, config)
+    const newValue = getNewValue(command, current.value);
+
+    config.update(command.setting, newValue, current.global);
 }
 
 function getNewValue(command: Command, currentValue: any): any {
