@@ -14,14 +14,16 @@ export function activate(context: vscode.ExtensionContext) {
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
+    let disposable1 = vscode.commands.registerCommand('preview.html.dont.preservefocus', () => {
         // The code you place here will be executed every time your command is executed
-
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
+        vscode.commands.executeCommand('vscode.previewHtml', vscode.window.activeTextEditor.document.uri, vscode.ViewColumn.Two, 'Takes Focus', false);
+    });
+    let disposable2 = vscode.commands.registerCommand('preview.html.preservefocus', () => {
+        // The code you place here will be executed every time your command is executed
+        vscode.commands.executeCommand('vscode.previewHtml', vscode.window.activeTextEditor.document.uri, vscode.ViewColumn.Three, 'Does Not Take Focus', true);
     });
 
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(disposable1, disposable2);
 }
 
 // this method is called when your extension is deactivated

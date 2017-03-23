@@ -11,13 +11,16 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "*"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
+            "command": "preview.html.preservefocus",
+            "title": "Preview Html: Preserve Focus"
+        }, {
+            "command": "preview.html.dont.preservefocus",
+            "title": "Preview Html: DON'T preserve focus"
         }]
     },
     "scripts": {

@@ -1,8 +1,8 @@
 {
-    "name": "vscode-api-playground-focus-active-editor",
-    "displayName": "VS Code API Playground - Focus Active Editor",
+    "name": "auto-collapse-explorer",
+    "displayName": "Auto-Collapse Explorer",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "hoovercj",
     "engines": {
         "vscode": "^1.10.0"
@@ -15,7 +15,15 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-
+        "configuration": {
+            "properties": {
+                "explorer.autoCollapse": {
+                    "type": "boolean",
+                    "description": "If true, the explorer will automatically collapse when a new file is focused",
+                    "default": true
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
