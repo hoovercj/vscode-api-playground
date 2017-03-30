@@ -52,7 +52,13 @@
           }
         }
       }
-    }
+    },
+    "commands": [
+        {
+            "command": "settings.cycle.show",
+            "title": "Show settings.cycle"
+        }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
