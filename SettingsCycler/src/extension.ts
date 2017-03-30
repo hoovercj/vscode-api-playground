@@ -1,5 +1,5 @@
 'use strict';
-import { ExtensionContext, workspace, window, commands as Commands, languages, WorkspaceConfiguration } from 'vscode';
+import { ExtensionContext, workspace, window, commands as Commands, languages, WorkspaceConfiguration, QuickPickItem } from 'vscode';
 
 const deepEqual = require('deep-equal')
 
@@ -30,17 +30,14 @@ function registerUtilityCommands() {
         const config = workspace.getConfiguration();
         const commands = workspace.getConfiguration('settings').get<Command[]>('cycle');
         window.showQuickPick(commands.reduce(function(o, c) {
-            o.push(`${c.setting} : ${ JSON.stringify(getCurrentSetting(c, config).value) }`)
+            o.push({ description: JSON.stringify(getCurrentSetting(c, config).value), label: c.setting})
             return o
-        },[])).then((selection:string) => {
+        }, [])).then((selection: QuickPickItem) => {
             if(selection) {
-                const setting = selection.split(' : ')
-                if(setting.length) {
-                    var command = commands.filter(cmd => {
-                        return cmd.setting == setting[0]
-                    })
-                    if(command.length) cycleSetting(command[0])
-                }
+                var command = commands.filter(cmd => {
+                    return cmd.setting == selection.label
+                })
+                if (command.length) cycleSetting(command[0])
             }
         })
     })
