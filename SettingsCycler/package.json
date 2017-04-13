@@ -2,7 +2,7 @@
   "name": "vscode-settings-cycler",
   "displayName": "Settings Cycler",
   "description": "Allows cycling through vscode settings using keyboard shortcuts",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "publisher": "hoovercj",
   "engines": {
     "vscode": "^1.10.0"
@@ -33,23 +33,42 @@
       "properties": {
         "settings.cycle": {
           "type": "array",
-          "default": [],
           "items": {
             "type": "object",
             "properties": {
-              "setting": {
+              "id": {
                 "type": "string",
-                "description": "The full setting name to change."
+                "description": "The name of the command to be created for this grouping of settings. Should be unique across all groups."
               },
               "values": {
                 "type": "array",
+                "description": "An array of setting groups to cycle through.",
                 "items": {
-                  "description": "A valid value for the setting"
-                },
-                "default": [true, false]
+                  "type": "object",
+                  "description": "An object with the setting name as the object key and the setting value (string, boolean, object, etc.) as the object value."
+                }
+              },
+              "overrideWorkspaceSettings": {
+                "type": "boolean",
+                "description": "When false (default), and a setting in the command is present in workspace settings, the command will abort without changing any settings. When true, if there is a workspace setting set, it will be overridden.",
+                "default": false
               }
             }
           }
+        },
+        "settings.cycle.warnOnWorkspaceSettingsCollisions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display a warning when commands fail to cycle settings due to existing workspace settings."
+        },
+        "settings.cycle.logLevel": {
+          "type": "string",
+          "enum": [
+            "none",
+            "error",
+            "info",
+            "log"
+          ]
         }
       }
     }
