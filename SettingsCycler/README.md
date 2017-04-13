@@ -7,7 +7,7 @@ This extension allows configuring commands to cycle through settings. At its sim
 
 ([See below](#how-to-use)) for how to use it.
 
-__Note:__ The configuration schema has changed in v1.0.0. I'm sorry for the breaking change.
+__Note:__ The configuration schema has changed in v1.0.0. I'm sorry for the breaking change, but if the extension detects old settings it will prompt to migrate them.
 
 ![Demo](images/demo.gif)
 
@@ -16,6 +16,8 @@ __Note:__ The configuration schema has changed in v1.0.0. I'm sorry for the brea
 There are two ways to configure commands. Directly in the keybindings file using the `settings.cycle` command with args, or by adding `settings.cycle` to user or workspace settings.
 
 By default, the extension will only modify user settings unless the `overrideWorkspaceSettings` option is set to true for a group. When true, it will still default to user settings unless there is already a workspace setting in place that it can override, in which case ALL of the specified settings will be set in workspace settings.
+
+Adding `"settings.cycle.warnOnWorkspaceSettingsCollisions": true` will give a visual warning when a command fails. 
 
 Note: I've used booleans and strings for the settings in the examples below, but any javascript object can be assigned.
 
