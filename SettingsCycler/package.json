@@ -33,20 +33,25 @@
       "properties": {
         "settings.cycle": {
           "type": "array",
-          "default": [],
           "items": {
             "type": "object",
             "properties": {
-              "setting": {
+              "id": {
                 "type": "string",
-                "description": "The full setting name to change."
+                "description": "The name of the command to be created for this grouping of settings."
               },
               "values": {
                 "type": "array",
+                "description": "An array of setting groups to cycle through.",
                 "items": {
-                  "description": "A valid value for the setting"
-                },
-                "default": [true, false]
+                  "type": "object",
+                  "description": "An object with the setting name as the object key and the setting value (string, boolean, object, etc.) as the object value."
+                }
+              },
+              "overrideWorkspaceSettings": {
+                "type": "boolean",
+                "description": "When true, if there is a workspace setting set, it will be overridden. If false, and a workspace setting is present, the command will abort without changing settings.",
+                "default": false
               }
             }
           }
