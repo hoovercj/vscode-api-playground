@@ -21,6 +21,20 @@
                      "default": false,
                      "type":"boolean",
                      "description": "Enable to activate POWER MODE!!!"
+                 }, 
+                 "powermode.comboThreshold": {
+                     "default": 0,
+                     "type": "number",
+                     "description": "The combo number needed to activate POWER MODE!!!"
+                 },
+                 "powermode.comboTimeout": {
+                     "default": 10,
+                     "type": "number",
+                     "description": "The number of seconds before the combo resets"
+                 },
+                 "powermode.explosion": {
+                    "type": "string",
+                    "description": "Anything that can go in the 'url()' part of a background image such as a base64 encoded gif or absolute file path WITHOUT quotes."
                  }
             }
         }
