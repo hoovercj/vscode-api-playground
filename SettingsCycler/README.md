@@ -28,7 +28,7 @@ If you like to keep your settings files small, you can use keybindings.json to p
 ```json
 {
 	"key": "F4",
-	"command": "toggle",
+	"command": "settings.cycle",
 	"when": "editorTextFocus",
 	"args": {
 		"id": "zen", // must be unique
