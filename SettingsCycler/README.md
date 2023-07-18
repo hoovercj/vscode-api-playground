@@ -21,14 +21,14 @@ Adding `"settings.cycle.warnOnWorkspaceSettingsCollisions": true` will give a vi
 
 Note: I've used booleans and strings for the settings in the examples below, but any javascript object can be assigned.
 
-### Option 1: Keybindings.json only
+### Option 1: `keybindings.json` only
 
 If you like to keep your settings files small, you can use keybindings.json to pass the settings directly to the `settings.cycle` command as args as shown below:
 
 ```json
 {
 	"key": "F4",
-	"command": "toggle",
+	"command": "settings.cycle",
 	"when": "editorTextFocus",
 	"args": {
 		"id": "zen", // must be unique
@@ -45,6 +45,14 @@ If you like to keep your settings files small, you can use keybindings.json to p
 		]
 	}
 }
+```
+
+`keybindings.json` should be located in the following directory, depending on your operating system:
+
+```
+Windows : %APPDATA%\Code\User\keybindings.json
+macOS   : ~/Library/Application Support/Code/User/keybindings.json
+Linux   : ~/.config/Code/User/keybindings.json
 ```
 
 ### Option 2: User settings + Keybindings.json
